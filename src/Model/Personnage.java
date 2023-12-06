@@ -6,7 +6,10 @@ public class Personnage {
     public String nom;
     private int puissance;
     public void attaquer(){
-
+        System.out.println("le personnage attaque");
+    }
+    public void defendre(){
+        System.out.println("le personnage se defend");
     }
 
     public Personnage(String nom, int pv, int puissance) {
@@ -39,7 +42,4 @@ public class Personnage {
         this.puissance = puissance;
     }
 
-    public void defendre(){
-
-    }
 }
