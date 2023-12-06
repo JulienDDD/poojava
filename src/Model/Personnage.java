@@ -1,7 +1,9 @@
 package src.Model;
 
 import java.util.ArrayList;
-public class Personnage {
+import java.util.Scanner;
+
+public class Personnage implements Interactuable {
     private int pv;
     public String nom;
     private int puissance;
@@ -42,4 +44,10 @@ public class Personnage {
         this.puissance = puissance;
     }
 
+    @Override
+    public void Rename(Personnage personnage, String interaction) {
+        System.out.println("Entrez le nouveau nom  :");
+        this.nom= new Scanner(System.in).nextLine();
+        System.out.println("le nouveau nom du joueur est " + this.nom);
+    }
 }
