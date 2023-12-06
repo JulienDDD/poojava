@@ -1,6 +1,6 @@
 package src.Model;
 
-public class Armure extends Objet {
+public class Armure extends ObjetEnJeu {
 
     int protectionRate;
     String materialType;
