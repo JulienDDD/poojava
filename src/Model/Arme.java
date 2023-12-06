@@ -15,4 +15,9 @@ public class Arme extends Objet {
         super(nom, rarete);
         this.degats = degats;
     }
+
+    @Override
+    public void interagir(Personnage personnage, String interaction) {
+
+    }
 }

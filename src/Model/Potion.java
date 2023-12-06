@@ -14,4 +14,9 @@ public class Potion extends Objet{
     public void setHDAmount(int HDAmount) {
         HDAmount = HDAmount;
     }
+
+    @Override
+    public void interagir(Personnage personnage, String interaction) {
+
+    }
 }

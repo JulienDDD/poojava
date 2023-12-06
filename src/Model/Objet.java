@@ -1,6 +1,6 @@
 package src.Model;
 
-public class Objet {
+public abstract class Objet implements Interactuable {
     public String getNom() {
         return nom;
     }
