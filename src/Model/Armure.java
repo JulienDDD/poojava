@@ -1,14 +1,19 @@
 package src.Model;
 
-public class Armure extends Object {
+public class Armure extends Objet {
 
     int protectionRate;
     String materialType;
 
-    public Armure(int protectionRate, String materialType) {
+
+    public Armure(String nom, int rarete, int protectionRate, String materialType) {
+        super(nom, rarete);
         this.protectionRate = protectionRate;
         this.materialType = materialType;
     }
 
+    @Override
+    public void interagir(Personnage personnage, String interaction) {
 
+    }
 }
