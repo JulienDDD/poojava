@@ -14,6 +14,5 @@ public class Ennemi extends Personnage {
     public Ennemi(String nom, int pv, int puissance, String race) {
         super(nom, pv, puissance);
         this.race = race;
-
     }
 }

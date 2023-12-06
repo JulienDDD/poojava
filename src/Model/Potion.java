@@ -1,2 +1,3 @@
-package src.Model;public class Potion {
+package src.Model;
+public class Potion {
 }
