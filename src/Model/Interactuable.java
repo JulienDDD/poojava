@@ -2,7 +2,7 @@ package src.Model;
 
 public interface Interactuable {
 
-    public void interagir(Personnage personnage, String interaction);
+    public void Rename(Personnage personnage, String interaction);
 
 
 }
