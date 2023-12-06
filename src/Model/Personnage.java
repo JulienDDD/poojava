@@ -46,6 +46,9 @@ public class Personnage implements Interactuable {
 
     @Override
     public void Rename(Personnage personnage, String interaction) {
+        /**
+         cette méthode permet de rennomer le joueur
+         **/
         System.out.println("Entrez le nouveau nom  :");
         this.nom= new Scanner(System.in).nextLine();
         System.out.println("le nouveau nom du joueur est " + this.nom);
