@@ -1,6 +1,6 @@
 package src.Model;
 import java.util.ArrayList;
-import java.util.Collections;
+
 public class Joueur extends Personnage{
     int id;
     ArrayList<ObjetEnJeu> inventaire = new ArrayList<>();

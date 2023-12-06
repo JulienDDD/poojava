@@ -1,6 +1,6 @@
 package src.Model;
 
-public class Potion extends Objet{
+public class Potion extends ObjetEnJeu{
     private int HDAmount;
     public Potion(String nom, int rarete, int HDAmount) {
         super(nom, rarete);

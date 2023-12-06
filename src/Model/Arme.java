@@ -1,6 +1,6 @@
 package src.Model;
 
-public class Arme extends Objet {
+public class Arme extends ObjetEnJeu {
     int degats;
 
     public int getDegats() {
