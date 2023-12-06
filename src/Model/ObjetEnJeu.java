@@ -36,4 +36,6 @@ public abstract class ObjetEnJeu implements Interactuable {
         this.nom= new Scanner(System.in).nextLine();
         System.out.println("le nouveau nom de l'objet est " + this.nom);
     }
+
+    public abstract void interagir(Personnage personnage, String interaction);
 }
