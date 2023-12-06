@@ -1,6 +1,6 @@
 package src.Model;
-
 import java.util.Scanner;
+
 
 public abstract class ObjetEnJeu implements Interactuable {
     public String getNom() {
