@@ -7,7 +7,7 @@ public class Personnage implements Interactuable {
     private int pv;
     public String nom;
     private int puissance;
-    public void attaquer(){
+    public void attaquer(Personnage victime){
         System.out.println("le personnage attaque");
     }
     public void defendre(){
@@ -52,5 +52,9 @@ public class Personnage implements Interactuable {
         System.out.println("Entrez le nouveau nom  :");
         this.nom= new Scanner(System.in).nextLine();
         System.out.println("le nouveau nom du joueur est " + this.nom);
+    }
+
+    public void removePv(int pvAmount){
+        System.out.println(pvAmount + " ont été retirés");
     }
 }
