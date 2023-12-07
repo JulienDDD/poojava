@@ -54,7 +54,10 @@ public class Personnage implements Interactuable {
         System.out.println("le nouveau nom du joueur est " + this.nom);
     }
 
-    public void removePv(int pvAmount){
-        System.out.println(pvAmount + " ont été retirés");
+    public void removePv(int pvAmount, Personnage victime){
+        int startPv = victime.getPv();
+        int endPv = startPv - pvAmount;
+        victime.setPv(endPv);
+        System.out.println(pvAmount + " pv ont été retirés");
     }
 }

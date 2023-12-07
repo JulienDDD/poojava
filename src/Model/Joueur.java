@@ -28,7 +28,7 @@ public class Joueur extends Personnage{
     public void attaquer(Personnage victime){
 
         System.out.println(nom + " attaque " + victime.getNom() );
-        victime.removePv(12);
+        victime.removePv(12, victime);
 
     }
     public void defendre(){
