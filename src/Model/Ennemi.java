@@ -1,5 +1,5 @@
 package src.Model;
-import java.utils.ArrayList;
+import java.util.ArrayList;
 public class Ennemi extends Personnage {
     String race;
     ArrayList<TypeEnnemis> inventaireEnnemi = new ArrayList<>();

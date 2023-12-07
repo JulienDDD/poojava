@@ -12,6 +12,8 @@ public class Armure extends ObjetEnJeu {
         this.materialType = materialType;
     }
 
+
+
     @Override
     public void interagir(Personnage personnage, String interaction) {
 
