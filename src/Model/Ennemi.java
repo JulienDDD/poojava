@@ -1,18 +1,18 @@
 package src.Model;
 import java.util.ArrayList;
 public class Ennemi extends Personnage {
-    String race;
-    ArrayList<TypeEnnemis> inventaireEnnemi = new ArrayList<>();
-    public String getRace() {
-        return race;
+    Arme monArme;
+
+    public Arme getMonArme() {
+        return monArme;
     }
 
-    public void setRace(String race) {
-        this.race = race;
+    public void setMonArme(Arme monArme) {
+        this.monArme = monArme;
     }
 
-    public Ennemi(String nom, int pv, int puissance, String race) {
+    public Ennemi(String nom, int pv, int puissance, Arme monArme) {
         super(nom, pv, puissance);
-        this.race = race;
+        this.monArme = monArme;
     }
 }
