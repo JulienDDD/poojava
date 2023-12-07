@@ -1,8 +1,9 @@
 package src.Model;
+import java.util.ArrayList;
 
 public class Ennemi extends Personnage {
     String race;
-
+    ArrayList<TypeEnnemis> inventaireEnnemi = new ArrayList<>();
     public String getRace() {
         return race;
     }

@@ -1,6 +1,6 @@
 package src.Model;
 
-public class Armure extends Objet {
+public class Armure extends ObjetEnJeu {
 
     int protectionRate;
     String materialType;
@@ -10,6 +10,10 @@ public class Armure extends Objet {
         super(nom, rarete);
         this.protectionRate = protectionRate;
         this.materialType = materialType;
+    }
+
+    public Armure(int protectionRate, String materialType) {
+        super(materialType, protectionRate);
     }
 
     @Override

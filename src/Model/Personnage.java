@@ -1,16 +1,19 @@
 package src.Model;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Personnage implements Interactuable {
     private int pv;
     public String nom;
     private int puissance;
-    public void attaquer(){
+
+    public void attaquer() {
         System.out.println("le personnage attaque");
     }
-    public void defendre(){
+
+    public void defendre() {
         System.out.println("le personnage se defend");
     }
 
@@ -46,8 +49,12 @@ public class Personnage implements Interactuable {
 
     @Override
     public void Rename(Personnage personnage, String interaction) {
-        System.out.println("Entrez le nouveau nom  :");
-        this.nom= new Scanner(System.in).nextLine();
-        System.out.println("le nouveau nom du joueur est " + this.nom);
+        try {
+            System.out.println("Entrez le nouveau nom  :");
+            this.nom = new Scanner(System.in).nextLine();
+            System.out.println("le nouveau nom du joueur est " + this.nom);
+        } catch (Exception e) {
+            System.err.println("Erreur lors de la saisie du nom : " + e.getMessage());
+        }
     }
 }
