@@ -25,15 +25,15 @@ public class Joueur extends Personnage{
         this.id = id;
     }
 
-    public void setId(int id) {
+    public void setIdJoueur(int id) {
         this.id = id;
     }
 
-    public ArrayList<ObjetEnJeu> getInventaire() {
+    public ArrayList<ObjetEnJeu> getInventaireJoueur() {
         return inventaire;
     }
 
-    public void setInventaire(ArrayList<ObjetEnJeu> inventaire) {
+    public void setInventaireJoueur(ArrayList<ObjetEnJeu> inventaire) {
         this.inventaire = inventaire;
     }
 

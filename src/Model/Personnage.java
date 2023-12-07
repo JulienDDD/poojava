@@ -59,6 +59,6 @@ public class Personnage implements Interactuable {
     }
 
     public void removePv(int pvAmount){
-        System.out.println(pvAmount + " ont été retirés");
+        System.out.println(pvAmount + " pv ont été retirés");
     }
 }
