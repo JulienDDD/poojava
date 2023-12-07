@@ -8,8 +8,7 @@ public class Personnage implements Interactuable {
     private int pv;
     public String nom;
     private int puissance;
-
-    public void attaquer() {
+    public void attaquer(Personnage victime){
         System.out.println("le personnage attaque");
     }
 
@@ -56,5 +55,10 @@ public class Personnage implements Interactuable {
         } catch (Exception e) {
             System.err.println("Erreur lors de la saisie du nom : " + e.getMessage());
         }
+
+    }
+
+    public void removePv(int pvAmount){
+        System.out.println(pvAmount + " ont été retirés");
     }
 }

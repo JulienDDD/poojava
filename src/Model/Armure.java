@@ -12,9 +12,6 @@ public class Armure extends ObjetEnJeu {
         this.materialType = materialType;
     }
 
-    public Armure(int protectionRate, String materialType) {
-        super(materialType, protectionRate);
-    }
 
     @Override
     public void interagir(Personnage personnage, String interaction) {
