@@ -74,13 +74,12 @@ public class Personnage implements Interactuable {
 
     public void attaquer(Personnage victime){
         int Damage = (int)(((float)this.getPuissance()*(float)coef + this.getMonArme().getDegats()) / victime.getResistance());
-        System.out.println(getNom() + " attaque " + victime.getNom() );
+        System.out.println(getNom() + " inflige des dégats à " + victime.getNom() );
         victime.removePv(Damage, victime);
     }
     public void removePv(int pvAmount, Personnage victime){
         int startPv = victime.getPv();
         int endPv = startPv - pvAmount;
         victime.setPv(endPv);
-        System.out.println(pvAmount + " pv ont été retirés");
     }
 }

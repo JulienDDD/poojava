@@ -57,7 +57,13 @@ public class Main {
         boolean game = true;
         boolean boutique = false;
         boolean combat = false;
+
         Ennemi mob = null;
+        ArrayList potions = new ArrayList<>();
+        ArrayList invDefaut = new ArrayList<>();
+        invDefaut.add(new Potion("Health",1,20));
+        invDefaut.add(new Potion("Poison",1,-20));
+
 
         Scanner sc = new Scanner(System.in);
         System.out.println("***** Creation de personnage *****");
@@ -68,6 +74,7 @@ public class Main {
         int pointsPv = Integer.parseInt(sc.nextLine());
         int pointsP = point-pointsPv;
         Joueur j = new Joueur(name, pointsPv, pointsP,listeArmes.get(0));
+        j.setInventaire(invDefaut);
         System.out.println("Ton personnage a " + j.getPv() + "pv et " + j.getPuissance() + " de puissance");
 
         System.out.println("Menu du jeu");
@@ -120,6 +127,7 @@ public class Main {
             System.out.println(mob.getMonArme().getNom());
             combat = true;
             System.out.println("###### Vous êtes en combat #######");
+
         }
         if (Objects.equals(answer, "3")) {
         }
@@ -140,15 +148,42 @@ public class Main {
             }
         }
         while (combat){
-            System.out.println("\n 1 - Attaquer \n 2 - Inventaire\n");
+            System.out.println("\n 1 - Attaquer \n 2 - Potions\n");
             answer = sc.nextLine();
             System.out.println("\nles pv du joueur sont de : "+j.getPv());
             System.out.println("les pv du mob sont de : "+mob.getPv()+"\n");
             if (Objects.equals(answer, "1")) {
                 j.attaquer(mob);
-            System.out.println("les pv du mob sont descendu à "+mob.getPv()+"pv.\n");
+            System.out.println("les pv de" + mob.getNom() + " sont descendu à "+mob.getPv()+"pv.\n");
             }if (Objects.equals(answer, "2")) {
-
+                if (j.getInventaire()==null){
+                    System.out.println("Votre inventaire est vide");
+                }else {
+                    System.out.println("Quelle potion voulez vous utiliser ?\n");
+                    int counter = 1;
+                    int intAnswer;
+                    Personnage ciblepotion;
+                    Object PotionUsed;
+                    ArrayList UsablePotion = new ArrayList<>();
+                    for (ObjetEnJeu elmt : j.getInventaire()){
+                        if (elmt instanceof Potion){
+                            UsablePotion.add(elmt);
+                            System.out.println(counter + " " + elmt.getNom()+"\n");
+                            counter+=1;
+                        }
+                    }
+                    answer = sc.nextLine();
+                    intAnswer = Integer.parseInt(answer);
+                    PotionUsed = UsablePotion.get(intAnswer+1);
+                    System.out.println("Sur qui voulez vous l'utiliser ?\n1 Vous\n2 Votre adversaire\n");
+                    answer = sc.nextLine();
+                    if (Objects.equals(answer, "1")) {
+                        PotionUsed.utiliser(j);
+                    if (Objects.equals(answer, "2")) {
+                        PotionUsed.utiliser(mob);
+                    }
+                    j.setInventaire(j.getInventaire());
+                }
             }
             if (mob.getPv() <= 0 || j.getPv() <= 0){
                 combat=false;
