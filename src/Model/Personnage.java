@@ -4,20 +4,27 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Personnage implements Interactuable {
+    private double coef = 0.2;
     private int pv;
-    public String nom;
+    private String nom;
+    private int resistance;
     private int puissance;
-    public void attaquer(Personnage victime){
-        System.out.println("le personnage attaque");
-    }
-    public void defendre(){
-        System.out.println("le personnage se defend");
-    }
 
+    public Personnage(String nom, int pv, int resistance, int puissance) {
+        this.pv = pv;
+        this.nom = nom;
+        this.resistance = resistance;
+        this.puissance = puissance;
+    }
     public Personnage(String nom, int pv, int puissance) {
         this.pv = pv;
         this.nom = nom;
+        this.resistance = 1;
         this.puissance = puissance;
+    }
+
+    public void defendre(){
+        System.out.println("le personnage se defend");
     }
 
     public int getPv() {
@@ -44,6 +51,14 @@ public class Personnage implements Interactuable {
         this.puissance = puissance;
     }
 
+    public int getResistance() {
+        return resistance;
+    }
+
+    public void setResistance(int resistance) {
+        this.resistance = resistance;
+    }
+
     @Override
     public void Rename(Personnage personnage, String interaction) {
         /**
@@ -54,6 +69,14 @@ public class Personnage implements Interactuable {
         System.out.println("le nouveau nom du joueur est " + this.nom);
     }
 
+    public Arme getMonArme() {return null;}
+
+
+    public void attaquer(Personnage victime){
+        int Damage = (int)(((float)this.getPuissance()*(float)coef + this.getMonArme().getDegats()) / victime.getResistance());
+        System.out.println(getNom() + " attaque " + victime.getNom() );
+        victime.removePv(Damage, victime);
+    }
     public void removePv(int pvAmount, Personnage victime){
         int startPv = victime.getPv();
         int endPv = startPv - pvAmount;

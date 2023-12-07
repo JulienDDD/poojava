@@ -29,6 +29,16 @@ public class Main {
 
     public static void main(String[] args) {
 
+        List<ObjetEnJeu> Inventaire = new ArrayList<>();
+
+        List<String>lstEnnemi = new ArrayList<String>();
+        lstEnnemi.add("Minautore");
+        lstEnnemi.add("Gobelin");
+        lstEnnemi.add("Gnome");
+        lstEnnemi.add("Satyr");
+        lstEnnemi.add("Troll");
+        lstEnnemi.add("Orc");
+
         List<Arme> listeArmes = new ArrayList<>();
 
         listeArmes.add(new Arme("Epee", 1, 10));
@@ -43,25 +53,28 @@ public class Main {
         listeArmes.add(new Arme("Pistolet à eau", 1, 1));
         listeArmes.add(new Arme("Lance", 1, 15));
 
-
-
         int point = 100;
+        boolean game = true;
+        boolean boutique = false;
+        boolean combat = false;
+        Ennemi mob = null;
+
         Scanner sc = new Scanner(System.in);
+        System.out.println("***** Creation de personnage *****");
+        System.out.println("Donne toi un nom");
+        String name = sc.nextLine();
+        System.out.println("d'accord ton nom est : " + name);
+        System.out.println("Tu as 100 point de disponible à répartir entre tes pv et ta puissance. \nCombien de pointveux tu mettre dans tes pv ?");
+        int pointsPv = Integer.parseInt(sc.nextLine());
+        int pointsP = point-pointsPv;
+        Joueur j = new Joueur(name, pointsPv, pointsP,listeArmes.get(0));
+        System.out.println("Ton personnage a " + j.getPv() + "pv et " + j.getPuissance() + " de puissance");
+
         System.out.println("Menu du jeu");
-        System.out.println("1 - Crée un nouveau personnage");
-        System.out.println("2 - Acheter des objets");
-        System.out.println("3 - Combattre");
+        System.out.println("1 - Boutique");
+        System.out.println("2 - Combattre");
+        System.out.println("3 - Inventaire");
         String answer = sc.nextLine();
-        if (Objects.equals(answer, "1")) {
-            System.out.println("***** Creation de personnage *****");
-            System.out.println("Donne toi un nom");
-            String name = sc.nextLine();
-            System.out.println("d'accord ton nom est : " + name);
-            System.out.println("Tu as 100 point de disponible à répartir dans tes pv et ta puissance. \nCombien de pointveux tu mettre dans tes pv ?");
-            int pointsPv = Integer.parseInt(sc.nextLine());
-            int pointsP = point-pointsPv;
-            Joueur j = new Joueur(name, pointsPv, pointsP, 1);
-            System.out.println("Ton personnage a " + j.getPv() + "pv et " + j.getPuissance() + " de puissance");
 
             // Création d'un fileWriter pour écrire dans un fichier
             /**FileWriter fileWriter = new FileWriter("/Users/batai/IdeaProjects/poojava/config", false);
@@ -93,35 +106,59 @@ public class Main {
                 line = reader.readLine();
             }
             reader.close();**/
+        if (Objects.equals(answer, "1")) {
+            boutique = true;
         }
-        else if (Objects.equals(answer, "2")) {
-
-            System.out.println("voici la boutique d'objets");
-            System.out.println("\n 1 - Potion de poison \n 2 - Potion de vie \n 3 - Jambieres \n 4 - Epées \n 5 - Armures \n 6 - Arc \n 7 - Plastrons \n 8 - WaterGun");
-        }
-        else if (Objects.equals(answer, "3")) {
-            List<String>lstEnnemi = new ArrayList<String>();
-            lstEnnemi.add("Minautore");
-            lstEnnemi.add("Gobelin");
-            lstEnnemi.add("Gnome");
-            lstEnnemi.add("Satyr");
-            lstEnnemi.add("Troll");
-            lstEnnemi.add("Orc");
+        if (Objects.equals(answer, "2")) {
             Random ran = new Random();
-            int pvEnnemi = ran.nextInt();
+            int pvEnnemi = ran.nextInt(50)+25;
             int indexAleatoire = ran.nextInt(lstEnnemi.size());
             String ennemiAleatoire = lstEnnemi.get(indexAleatoire);
             Arme armeChoisie = choisirSelonRarete(listeArmes);
 
-            Ennemi E = new Ennemi(ennemiAleatoire, pvEnnemi, 100-pvEnnemi,armeChoisie);
-            System.out.println(E.getMonArme().getNom());
-
-
-
-
-
-
+            mob = new Ennemi(ennemiAleatoire, pvEnnemi, 100-pvEnnemi,armeChoisie);
+            System.out.println(mob.getMonArme().getNom());
+            combat = true;
+            System.out.println("###### Vous êtes en combat #######");
         }
+        if (Objects.equals(answer, "3")) {
+        }
+        while (boutique){
+            System.out.println("voici la boutique d'objets");
+            System.out.println("\n 1 - Potion de poison \n 2 - Potion de vie \n 3 - Jambieres \n 4 - Epées \n 5 - Armures \n 6 - Arc \n 7 - Plastrons \n 8 - WaterGun");
+            answer = sc.nextLine();
+            if (Objects.equals(answer, "1")) {
+            }if (Objects.equals(answer, "2")) {
+            }if (Objects.equals(answer, "3")) {
+            }if (Objects.equals(answer, "4")) {
+            }if (Objects.equals(answer, "5")) {
+            }if (Objects.equals(answer, "6")) {
+            }if (Objects.equals(answer, "7")) {
+            }if (Objects.equals(answer, "8")) {
+            }if (Objects.equals(answer, "0")) {
+                boutique = false;
+            }
+        }
+        while (combat){
+            System.out.println("\n 1 - Attaquer \n 2 - Inventaire\n");
+            answer = sc.nextLine();
+            System.out.println("\nles pv du joueur sont de : "+j.getPv());
+            System.out.println("les pv du mob sont de : "+mob.getPv()+"\n");
+            if (Objects.equals(answer, "1")) {
+                j.attaquer(mob);
+            System.out.println("les pv du mob sont descendu à "+mob.getPv()+"pv.\n");
+            }if (Objects.equals(answer, "2")) {
 
+            }
+            if (mob.getPv() <= 0 || j.getPv() <= 0){
+                combat=false;
+                break;
+            }
+            mob.attaquer(j);
+            System.out.println("Vos pv sont descendu à "+j.getPv()+"pv.");
+            if (mob.getPv() <= 0 || j.getPv() <= 0){
+                combat=false;
+            }
+        }
     }
 }

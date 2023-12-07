@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Ennemi extends Personnage {
     Arme monArme;
 
+    @Override
     public Arme getMonArme() {
         return monArme;
     }
