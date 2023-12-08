@@ -21,5 +21,6 @@ public class Potion extends ObjetEnJeu{
 
     public void utiliser(Personnage cible){
         cible.setPv(cible.getPv()+this.getHDAmount());
+        cible.retirerObjet(this);
     }
 }

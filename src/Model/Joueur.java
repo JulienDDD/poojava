@@ -53,6 +53,9 @@ public class Joueur extends Personnage{
         return inventaire;
     }
 
+    public void retirerObjet(ObjetEnJeu objet) {
+        inventaire.remove(objet);
+    }
     public void setInventaire(ArrayList<ObjetEnJeu> inventaire) {
         this.inventaire = inventaire;
     }

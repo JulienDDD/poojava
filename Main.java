@@ -10,7 +10,7 @@ public class Main {
 
     public static Arme choisirSelonRarete(List<Arme> liste) {
         Random random = new Random();
-        int r = random.nextInt(3) + 1;
+        int r = random.nextInt(4) + 1;
 
         List<Arme> filtres = new ArrayList<>();
         for (Arme arme : liste) {
@@ -23,7 +23,6 @@ public class Main {
             int indexChoisi = random.nextInt(filtres.size());
             return filtres.get(indexChoisi);
         }
-
         return null;
     }
 
@@ -53,6 +52,12 @@ public class Main {
         listeArmes.add(new Arme("Pistolet à eau", 1, 1));
         listeArmes.add(new Arme("Lance", 1, 15));
 
+        List<Armure> listeArmures = new ArrayList<>();
+
+        listeArmures.add(new Armure("Casque",1,2,"iron"));
+        listeArmures.add(new Armure("Jambiere",1,3,"iron"));
+        listeArmures.add(new Armure("Plastron",1,5,"iron"));
+
         int point = 100;
         boolean game = true;
         boolean boutique = false;
@@ -81,10 +86,10 @@ public class Main {
         System.out.println("Ton personnage a " + j.getPv() + "pv et " + j.getPuissance() + " de puissance");
 
         while (game){
-            System.out.println("Menu du jeu");
+            System.out.println("\n##### Menu du jeu #####\n");
             System.out.println("1 - Boutique");
             System.out.println("2 - Combattre");
-            System.out.println("3 - Inventaire");
+            System.out.println("3 - Inventaire\n");
             String answer = sc.nextLine();
 
                 // Création d'un fileWriter pour écrire dans un fichier
@@ -132,29 +137,74 @@ public class Main {
                 Arme armeChoisie = choisirSelonRarete(listeArmes);
 
                 mob = new Ennemi(ennemiAleatoire, pvEnnemi, 100-pvEnnemi,armeChoisie);
-                System.out.println(mob.getMonArme().getNom());
                 combat = true;
-                System.out.println("###### Vous êtes en combat #######");
+                System.out.println("\n###### Vous êtes en combat #######\n");
 
             }
+
+            //Partie Inventaire
             if (Objects.equals(answer, "3")) {
+                System.out.println("\nVous avez "+j.getPv()+" points de vie.\n" +
+                                   "Votre puissance est de "+j.getPuissance()+".\n"+
+                                   "votre Arme est une "+j.getMonArme().getNom()+" et elle inflige "+j.getMonArme().getDegats()+" dégats.\n");
                 OpenInv = true;
             }
 
 
             // Partie Boutique
             while (boutique){
-                System.out.println("voici la boutique d'objets");
-                System.out.println("\n 1 - Potion de poison \n 2 - Potion de vie \n 3 - Jambieres \n 4 - Epées \n 5 - Armures \n 6 - Arc \n 7 - Plastrons \n 8 - WaterGun");
+                System.out.println("voici la boutique d'objets que vous pouvez acheter.");
+                System.out.println("Vous avez actuellement "+j.getConis()+" coins en votre possession.");
+                System.out.println("\n 1 - Potion de poison (20 coins) \n 2 - Potion de vie (20 coins) \n 3 - Jambieres (30 coins) \n 4 - Epées (10 coins) \n 5 - Arc (15 coins) \n 5 - Plastrons (45 coins) \n 0 - Revenir au menu");
                 answer = sc.nextLine();
                 if (Objects.equals(answer, "1")) {
+                    if (j.getConis()<20){
+                        System.out.println("Vous n'avez pas assez de coins pour cette potion");
+                    }else{
+                        j.setConis(j.getConis()-20);
+                        j.getInventaire().add(new Potion("Poison",1,-20));
+                        System.out.println("Vous avez fait l'acquisition d'une potion de poison.");
+                    }
                 }if (Objects.equals(answer, "2")) {
+                    if (j.getConis()<20){
+                        System.out.println("Vous n'avez pas assez de coins pour cette potion");
+                    }else{
+                        j.setConis(j.getConis()-20);
+                        j.getInventaire().add(new Potion("Health",1,20));
+                        System.out.println("Vous avez fait l'acquisition d'une potion de vie.");
+                    }
                 }if (Objects.equals(answer, "3")) {
+                    if (j.getConis()<30){
+                        System.out.println("Vous n'avez pas assez de coins pour cette armure");
+                    }else{
+                        j.setConis(j.getConis()-30);
+                        j.getInventaire().add(listeArmures.get(1));
+                        System.out.println("Vous avez fait l'acquisition de jambiere.");
+                    }
                 }if (Objects.equals(answer, "4")) {
+                    if (j.getConis()<10){
+                        System.out.println("Vous n'avez pas assez de coins pour cette armure");
+                    }else {
+                        j.setConis(j.getConis() - 10);
+                        listeArmes.get(0);
+                        System.out.println("Vous avez fait l'acquisition d'une épée.");
+                    }
                 }if (Objects.equals(answer, "5")) {
+                    if (j.getConis()<15){
+                        System.out.println("Vous n'avez pas assez de coins pour cette armure");
+                    }else{
+                        j.setConis(j.getConis()-15);
+                        listeArmes.get(6);
+                        System.out.println("Vous avez fait l'acquisition d'un arc.");
+                    }
                 }if (Objects.equals(answer, "6")) {
-                }if (Objects.equals(answer, "7")) {
-                }if (Objects.equals(answer, "8")) {
+                        if (j.getConis()<45){
+                            System.out.println("Vous n'avez pas assez de coins pour cette armure");
+                        }else{
+                            j.setConis(j.getConis()-45);
+                            j.getInventaire().add(listeArmures.get(2));
+                            System.out.println("Vous avez fait l'acquisition d'un plastron.");
+                        }
                 }if (Objects.equals(answer, "0")) {
                     boutique = false;
                 }
@@ -163,13 +213,16 @@ public class Main {
 
             // Partie Combat
             while (combat){
+                if (mob.getMonArme() != null) {
+                    System.out.println("Vous combatez un " + mob.getNom() + " maniant une " + mob.getMonArme().getNom() + ".");
+                }
+                System.out.println("\nles pv du joueur sont de : "+j.getPv());
+                System.out.println("les pv du mob sont de : "+mob.getPv());
                 System.out.println("\n 1 - Attaquer \n 2 - Potions\n");
                 answer = sc.nextLine();
-                System.out.println("\nles pv du joueur sont de : "+j.getPv());
-                System.out.println("les pv du mob sont de : "+mob.getPv()+"\n");
                 if (Objects.equals(answer, "1")) {
                     j.attaquer(mob);
-                    System.out.println("les pv de" + mob.getNom() + " sont descendu à "+mob.getPv()+"pv.\n");
+                    System.out.println("\nles pv de" + mob.getNom() + " sont descendu à "+mob.getPv()+"pv.\n");
                 }if (Objects.equals(answer, "2")) {
                     if (j.getInventaire()==null){
                         System.out.println("Votre inventaire est vide");
@@ -205,8 +258,12 @@ public class Main {
                         System.out.println("Vous êtes mort.");
                     }
                     else {
+                        j.setConis(j.getConis()+20);
+                        j.getInventaire().add(mob.getMonArme());
                         System.out.println(mob.getNom()+" est mort.");
+                        System.out.println("En dépouillant le cadavre de votre adversaire vous récupérez son arme :"+mob.getMonArme().getNom());
                     }
+                    mob = null;
                     break;
                 }
                 mob.attaquer(j);
@@ -216,8 +273,13 @@ public class Main {
                         game=false;
                         System.out.println("Vous êtes mort.");
                     }else {
+                        j.setConis(j.getConis()+20);
+                        j.getInventaire().add(mob.getMonArme());
                         System.out.println(mob.getNom()+" est mort.");
+                        System.out.println("\nVous avez gagné 20 coins !!!");
+                        System.out.println("En dépouillant le cadavre de votre adversaire vous récupérez son arme :"+mob.getMonArme().getNom());
                     }
+                    mob = null;
                 }else {
                     System.out.println("Vos pv sont descendu à "+j.getPv()+"pv.");
                 }
@@ -232,11 +294,16 @@ public class Main {
                     System.out.println(counter + " " + elmt.getNom() + "\n");
                     counter += 1;
                 }
+                System.out.println("0 Quitter l'inventaire\n");
                 answer = sc.nextLine();
                 intAnswer = Integer.parseInt(answer);
-                ElmtUsed = Usable_elmt.get(intAnswer-1);
-                System.out.println("Sur qui voulez vous l'utiliser ?\n1 Vous\n2 Votre adversaire\n");
-                ((ObjetEnJeu) ElmtUsed).utiliser(j);
+                if (Objects.equals(answer, "0")) {
+                    OpenInv=false;
+                }else {
+                    ElmtUsed = Usable_elmt.get(intAnswer-1);
+                    ((ObjetEnJeu) ElmtUsed).utiliser(j);
+                    System.out.println("Vous avez utilisé "+ElmtUsed.getNom());
+                }
             }
         }
     }

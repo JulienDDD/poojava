@@ -16,6 +16,10 @@ public class Arme extends ObjetEnJeu {
         this.degats = degats;
     }
 
+    public void utiliser(Personnage cible){
+        cible.setMonArme(this);
+        cible.retirerObjet(this);
+    }
     @Override
     public void interagir(Personnage personnage, String interaction) {
 
