@@ -17,6 +17,9 @@ public class Potion extends ObjetEnJeu{
 
     @Override
     public void interagir(Personnage personnage, String interaction) {
+    }
 
+    public void utiliser(Personnage cible){
+        cible.setPv(cible.getPv()+this.getHDAmount());
     }
 }

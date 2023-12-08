@@ -154,7 +154,6 @@ public class Main {
             System.out.println("les pv du mob sont de : "+mob.getPv()+"\n");
             if (Objects.equals(answer, "1")) {
                 j.attaquer(mob);
-            System.out.println("les pv de" + mob.getNom() + " sont descendu à "+mob.getPv()+"pv.\n");
             }if (Objects.equals(answer, "2")) {
                 if (j.getInventaire()==null){
                     System.out.println("Votre inventaire est vide");
@@ -164,7 +163,7 @@ public class Main {
                     int intAnswer;
                     Personnage ciblepotion;
                     Object PotionUsed;
-                    ArrayList UsablePotion = new ArrayList<>();
+                    ArrayList<ObjetEnJeu> UsablePotion = new ArrayList<>();
                     for (ObjetEnJeu elmt : j.getInventaire()){
                         if (elmt instanceof Potion){
                             UsablePotion.add(elmt);
@@ -178,13 +177,14 @@ public class Main {
                     System.out.println("Sur qui voulez vous l'utiliser ?\n1 Vous\n2 Votre adversaire\n");
                     answer = sc.nextLine();
                     if (Objects.equals(answer, "1")) {
-                        PotionUsed.utiliser(j);
-                    if (Objects.equals(answer, "2")) {
-                        PotionUsed.utiliser(mob);
+                        ((Potion) PotionUsed).utiliser(j);
+                    }if (Objects.equals(answer, "2")) {
+                        ((Potion)PotionUsed).utiliser(mob);
                     }
                     j.setInventaire(j.getInventaire());
                 }
             }
+            System.out.println("les pv de" + mob.getNom() + " sont descendu à "+mob.getPv()+"pv.\n");
             if (mob.getPv() <= 0 || j.getPv() <= 0){
                 combat=false;
                 break;
