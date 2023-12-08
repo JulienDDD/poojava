@@ -27,6 +27,9 @@ public abstract class ObjetEnJeu implements Interactuable {
         this.rarete = rarete;
     }
 
+
+    public void utiliser(Personnage cible){
+    }
     @Override
     public void Rename(Personnage personnage, String interaction) {
         /**
