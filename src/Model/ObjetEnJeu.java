@@ -19,6 +19,9 @@ public abstract class ObjetEnJeu implements Interactuable {
         this.rarete = rarete;
     }
 
+    /*
+    Variables contenant le nom ainsi que le coefficient de rareté de l'objet
+     */
     String nom;
     int rarete;
 
@@ -27,6 +30,9 @@ public abstract class ObjetEnJeu implements Interactuable {
         this.rarete = rarete;
     }
 
+
+    public void utiliser(Personnage cible){
+    }
     @Override
     public void Rename(Personnage personnage, String interaction) {
         /**

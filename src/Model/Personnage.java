@@ -5,21 +5,27 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Personnage implements Interactuable {
+    private double coef = 0.2;
     private int pv;
-    public String nom;
+    private String nom;
+    private int resistance;
     private int puissance;
-    public void attaquer(Personnage victime){
-        System.out.println("le personnage attaque");
-    }
 
-    public void defendre() {
-        System.out.println("le personnage se defend");
+    public Personnage(String nom, int pv, int resistance, int puissance) {
+        this.pv = pv;
+        this.nom = nom;
+        this.resistance = resistance;
+        this.puissance = puissance;
     }
-
     public Personnage(String nom, int pv, int puissance) {
         this.pv = pv;
         this.nom = nom;
+        this.resistance = 1;
         this.puissance = puissance;
+    }
+
+    public void defendre(){
+        System.out.println("le personnage se defend");
     }
 
     public int getPv() {
@@ -46,6 +52,14 @@ public class Personnage implements Interactuable {
         this.puissance = puissance;
     }
 
+    public int getResistance() {
+        return resistance;
+    }
+
+    public void setResistance(int resistance) {
+        this.resistance = resistance;
+    }
+
     @Override
     public void Rename(Personnage personnage, String interaction) {
         try {
@@ -58,7 +72,29 @@ public class Personnage implements Interactuable {
 
     }
 
-    public void removePv(int pvAmount){
-        System.out.println(pvAmount + " pv ont été retirés");
+    public Arme getMonArme() {return null;}
+
+    public void setMonArme(Arme MonArme) {}
+
+    public void retirerObjet(ObjetEnJeu objet) {}
+
+    /*
+    Fonction permettant d'infliger des degats à un autre personnage
+    :param victime : Instance du personnage (ennemi ou joueur) quoi recoit l'attaque
+     */
+    public void attaquer(Personnage victime){
+        int Damage = (int)(((float)this.getPuissance()*(float)coef + this.getMonArme().getDegats()) / (1+victime.getResistance()/10));
+        System.out.println(getNom() + " inflige des dégats à " + victime.getNom() );
+        victime.removePv(Damage, victime);
+    }
+
+    /*
+    Fonction de supression des pv du personnage victime
+     */
+    public void removePv(int pvAmount, Personnage victime){
+        int startPv = victime.getPv();
+        int endPv = startPv - pvAmount;
+        victime.setPv(endPv);
+
     }
 }
