@@ -83,9 +83,11 @@ public class Personnage implements Interactuable {
     :param victime : Instance du personnage (ennemi ou joueur) quoi recoit l'attaque
      */
     public void attaquer(Personnage victime){
-        int Damage = (int)(((float)this.getPuissance()*(float)coef + this.getMonArme().getDegats()) / (1+victime.getResistance()/10));
-        System.out.println(getNom() + " inflige des dégats à " + victime.getNom() );
-        victime.removePv(Damage, victime);
+        if (getMonArme() != null) {
+            int Damage = (int) (((float) this.getPuissance() * (float) coef + this.getMonArme().getDegats()) / (1 + victime.getResistance() / 10));
+            System.out.println(getNom() + " inflige des dégats à " + victime.getNom());
+            victime.removePv(Damage, victime);
+        }
     }
 
     /*
