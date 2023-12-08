@@ -2,10 +2,19 @@ package src.Model;
 import java.util.ArrayList;
 
 public class Joueur extends Personnage{
+
+    /* Variable du pourcentage de degat que le joueur inflige */
     private double coef = 0.5;
     private int id;
+
+
+    /* Variable contenant l'argent en jeu du joueur  */
     private int coins;
+
+    /* Variable contenant l'instance de l'arme du joueur */
     private static Arme MonArme;
+
+    /* Variable contenant l'inventaire du joueur */
     private ArrayList<ObjetEnJeu> inventaire;
 
     // Constructeur avec tous les paramètres
@@ -53,9 +62,16 @@ public class Joueur extends Personnage{
         return inventaire;
     }
 
+    /* Supprimer un objet de l'inventaire
+    :param objet : Objet à supprimer de la liste 'Inventaire'
+    */
     public void retirerObjet(ObjetEnJeu objet) {
         inventaire.remove(objet);
     }
+
+    /* Définir un inventaire
+    :param inventaire : Arraylist contenant l'inventaire que vous souhaitez attribuer au joueur'
+    */
     public void setInventaire(ArrayList<ObjetEnJeu> inventaire) {
         this.inventaire = inventaire;
     }

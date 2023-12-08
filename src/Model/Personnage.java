@@ -75,12 +75,19 @@ public class Personnage implements Interactuable {
 
     public void retirerObjet(ObjetEnJeu objet) {}
 
-
+    /*
+    Fonction permettant d'infliger des degats à un autre personnage
+    :param victime : Instance du personnage (ennemi ou joueur) quoi recoit l'attaque
+     */
     public void attaquer(Personnage victime){
         int Damage = (int)(((float)this.getPuissance()*(float)coef + this.getMonArme().getDegats()) / (1+victime.getResistance()/10));
         System.out.println(getNom() + " inflige des dégats à " + victime.getNom() );
         victime.removePv(Damage, victime);
     }
+
+    /*
+    Fonction de supression des pv du personnage victime
+     */
     public void removePv(int pvAmount, Personnage victime){
         int startPv = victime.getPv();
         int endPv = startPv - pvAmount;

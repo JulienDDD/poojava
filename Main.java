@@ -8,6 +8,11 @@ import java.io.*;
 
 public class Main {
 
+     /*
+       Permet de choisir une arme parmi une liste selon leur coefficient de rarete
+       :param liste : La liste d'instances des armes
+
+     */
     public static Arme choisirSelonRarete(List<Arme> liste) {
         Random random = new Random();
         int r = random.nextInt(4) + 1;
@@ -209,7 +214,6 @@ public class Main {
                     boutique = false;
                 }
             }
-
 
             // Partie Combat
             while (combat){
